@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.0.0)
+project(IntegrateCJson VERSION 0.1.0)
+
+include(CTest)
+enable_testing()
+add_executable(IntegrateCJson main.cpp)
+
+find_package(cJSON)
+if(cJSON_FOUND)
+    include_directories(${cJSON_INCLUDE_DIRS})
+    target_link_libraries(${PROJECT_NAME} ${cJSON__LIBS})
+else()
+    message(FATAL_ERROR "cJSON can not find")
+endif()
+set(CPACK_PROJECT_NAME ${PROJECT_NAME})
+set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
+include(CPack)
